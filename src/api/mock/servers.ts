@@ -1,0 +1,40 @@
+import { Server } from "../types/server";
+
+export const serversMock: Server[] = [
+  {
+    id: "srv-1",
+    name: "web-01",
+    hostname: "web-01.internal",
+    ip: "10.0.0.11",
+    env: "prod",
+    tags: ["web", "nginx"],
+    owner: "team-web",
+    netdataUrl: "http://10.0.0.11:19999",
+    status: "up",
+    lastSeen: new Date().toISOString(),
+  },
+  {
+    id: "srv-2",
+    name: "api-01",
+    hostname: "api-01.internal",
+    ip: "10.0.0.21",
+    env: "prod",
+    tags: ["api", "node"],
+    owner: "team-api",
+    netdataUrl: "http://10.0.0.21:19999",
+    status: "degraded",
+    lastSeen: new Date(Date.now() - 60_000).toISOString(),
+  },
+  {
+    id: "srv-3",
+    name: "db-01",
+    hostname: "db-01.internal",
+    ip: "10.0.0.31",
+    env: "staging",
+    tags: ["db", "postgres"],
+    owner: "team-data",
+    netdataUrl: "http://10.0.0.31:19999",
+    status: "up",
+    lastSeen: new Date().toISOString(),
+  },
+];
