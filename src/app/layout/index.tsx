@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import Sidebar from "../../partials/Sidebar";
+import Header from "../../partials/Header";
 
 export const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Placeholder layout; wire with sidebar/topbar from your UI kit later.
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
-      <main className="mx-auto max-w-7xl px-6 py-6">{children}</main>
+    <div className="flex h-screen overflow-hidden">
+      {/* Sidebar */}
+      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+
+      {/* Content area */}
+      <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+        {/* Site header */}
+        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+
+        {/* Main content */}
+        <main className="grow">
+          <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+            {children}
+          </div>
+        </main>
+      </div>
     </div>
   );
 };

@@ -13,6 +13,7 @@ export interface Server {
   netdataUrl?: string;
   status: ServerStatus;
   lastSeen: string;
+  notes?: string;
 }
 
 export interface PortOccupancy {

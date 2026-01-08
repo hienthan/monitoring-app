@@ -1,82 +1,51 @@
-# Free Tailwind admin dashboard template
+# Monitoring App - Tailwind Dashboard Template
 
-![Mosaic Tailwind admin template preview](https://github.com/cruip/tailwind-dashboard-template/assets/2683512/ef306423-3b89-4d0c-be80-9c5c682478d1)
+Monitoring and inventory management application built with React, Tailwind CSS, HeroUI, and PocketBase.
 
-**Mosaic Lite** is a responsive admin dashboard template built on top of Tailwind CSS and fully coded in React. It comes with several pre-coded charts (built with Chart.js 3) and widgets, and it's a great starting for anyone who wants to create a user interface for SaaS products, administrator dashboards, modern web apps, and more.
+## Environment Variables
 
-**UPDATE 2025-02-02** Added Tailwind v4 support!
+### PocketBase URL
 
-Use it for whatever you want, and be sure to reach us out on [Twitter](https://twitter.com/Cruip_com) if you build anything cool/useful with it.
+Set `VITE_PB_URL` in your `.env` file to configure the PocketBase instance URL:
 
-Created and maintained with ❤️ by [Cruip.com](https://cruip.com/).
-
-## Live demo
-
-Check the live demo here 👉️ [https://mosaic.cruip.com/](https://mosaic.cruip.com/)
-
-## Mosaic Pro
-
-[![Mosaic Tailwind Admin Template](https://github.com/cruip/tailwind-dashboard-template/assets/2683512/2b4d0fae-bb07-4229-8a8a-48005f2f33cb)](https://cruip.com/mosaic/)
-
-## Design files
-
-If you need the design files, you can download them from Figma's Community 👉 https://bit.ly/3sigqHe
-
-## Table of contents
-
-* [Usage](#usage)
-  * [Project setup](#project-setup)
-  * [Compiles and hot-reloads for development](#compiles-and-hot-reloads-for-development)
-  * [Compiles and minifies for production](#compiles-and-minifies-for-production)
-  * [Customize configuration](#customize-configuration)
-* [Support notes](#support-notes)            
-* [Credits](#credits)
-* [Terms and License](#terms-and-license)
-* [About Us](#about-us)
-* [Stay in the loop](#stay-in-the-loop)
-
-## Usage
-
-This project was bootstrapped with [Vite](https://vitejs.dev/).
-
-### Project setup
+```bash
+VITE_PB_URL=http://gmo021.cansportsvg.com:8090
 ```
+
+**Default value**: `http://gmo021.cansportsvg.com:8090`
+
+If not set, the application will use the default URL above.
+
+## Project Structure
+
+```
+src/
+  components/servers/     # Server-related components
+  pages/
+    dashboard/            # Dashboard pages
+    servers/              # Server pages
+  repositories/          # Data access layer
+  lib/                   # Utilities (pb.ts for PocketBase config)
+  types/                 # TypeScript types
+```
+
+## Features
+
+- Server grid with search and filtering
+- Server detail page with Apps and Ports
+- Expandable rows in Apps table to show ports
+- Responsive layout with Mosaic sidebar
+- HeroUI components integration
+
+## Development
+
+```bash
 npm install
-```
-
-#### Compiles and hot-reloads for development
-```
 npm run dev
 ```
 
-#### Compiles and minifies for production
-```
+## Build
+
+```bash
 npm run build
 ```
-
-#### Customize configuration
-See [Configuration Reference](https://vitejs.dev/guide/).
-
-### Support notes
-We are shipping our templates with a very basic React configuration to let you quickly get into the development process, but we don't discourage you from using any other configuration or framework built on the top of React. So, please note that any request dealing with React (e.g. extra features, customisations, et cetera) is to be considered out of the support scope.
-
-For more information about what support covers, please see our (FAQs)[https://cruip.com/faq/].
-
-## Credits
-
-- [Nucleo](https://nucleoapp.com/)
-
-## Terms and License
-
-- Released under the [GPL](https://www.gnu.org/licenses/gpl-3.0.html).
-- Copyright 2020 [Cruip](https://cruip.com/).
-- Use it for personal and commercial projects, but please don’t republish, redistribute, or resell the template.
-- Attribution is not required, although it is really appreciated.
-
-## About Us
-
-We're an Italian developer/designer duo creating high-quality design/code resources for developers, makers, and startups.
-
-## Stay in the loop
-
-If you would like to know when we release new resources, you can follow [@pacovitiello](https://x.com/pacovitiello) and [@DavidePacilio](https://x.com/DavidePacilio) on X, or you can subscribe to our [newsletter](https://cruip.com/newsletter/).

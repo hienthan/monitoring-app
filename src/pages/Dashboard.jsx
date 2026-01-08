@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Sidebar from '../partials/Sidebar';
 import Header from '../partials/Header';
@@ -17,11 +17,30 @@ import DashboardCard10 from '../partials/dashboard/DashboardCard10';
 import DashboardCard11 from '../partials/dashboard/DashboardCard11';
 import DashboardCard12 from '../partials/dashboard/DashboardCard12';
 import DashboardCard13 from '../partials/dashboard/DashboardCard13';
+import DashboardMockSummary from '../partials/dashboard/DashboardMockSummary';
+import { dashboardRepo } from '../repositories/dashboardRepo';
 import Banner from '../partials/Banner';
 
 function Dashboard() {
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [datacenterCards, setDatacenterCards] = useState([]);
+
+  useEffect(() => {
+    let mounted = true;
+    dashboardRepo
+      .getDatacenterCards()
+      .then((cards) => {
+        if (mounted) setDatacenterCards(cards);
+      })
+      .catch((err) => {
+        console.error('Failed to load mock datacenter cards', err);
+        if (mounted) setDatacenterCards([]);
+      });
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -65,6 +84,9 @@ function Dashboard() {
 
             {/* Cards */}
             <div className="grid grid-cols-12 gap-6">
+
+              {/* Mock data snapshot */}
+              <DashboardMockSummary cards={datacenterCards} />
 
               {/* Line chart (Acme Plus) */}
               <DashboardCard01 />
