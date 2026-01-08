@@ -1,5 +1,4 @@
 import React from "react";
-import { Card, CardBody, CardHeader } from "@heroui/react";
 import { Server } from "../../types/inventory";
 
 interface ServerOverviewProps {
@@ -18,20 +17,24 @@ export const ServerOverview: React.FC<ServerOverviewProps> = ({ server }) => {
   ];
 
   return (
-    <Card>
-      <CardHeader>
-        <h3 className="text-lg font-semibold">Server Information</h3>
-      </CardHeader>
-      <CardBody>
-        <dl className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {details.map((detail) => (
-            <div key={detail.label} className="space-y-1">
-              <dt className="text-sm font-medium text-default-600">{detail.label}</dt>
-              <dd className="text-sm text-default-900">{detail.value}</dd>
-            </div>
-          ))}
-        </dl>
-      </CardBody>
-    </Card>
+    <div className="space-y-2">
+      <h3 className="text-lg font-semibold px-1">Server Information</h3>
+      <div className="overflow-hidden rounded border bg-white">
+        <table className="min-w-full text-sm">
+          <tbody className="divide-y">
+            {details.map((detail) => (
+              <tr key={detail.label} className="hover:bg-slate-50">
+                <td className="px-3 py-2 font-medium text-slate-700 w-1/3">
+                  {detail.label}
+                </td>
+                <td className="px-3 py-2 text-center text-slate-900">
+                  {detail.value}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 };

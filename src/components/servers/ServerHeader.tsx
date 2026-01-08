@@ -19,28 +19,40 @@ export const ServerHeader: React.FC<ServerHeaderProps> = ({
   const lastSeenDate = new Date(server.lastSeen);
 
   return (
-    <div className="space-y-4">
-      <Breadcrumbs>
-        <BreadcrumbItem>
-          <Link to="/dashboard/servers">Servers</Link>
-        </BreadcrumbItem>
-        <BreadcrumbItem>{server.name}</BreadcrumbItem>
-      </Breadcrumbs>
+    <div className="space-y-6">
+      {/* Breadcrumb section - separated */}
+      <div className="pb-4 border-b border-slate-200">
+        <Breadcrumbs>
+          <BreadcrumbItem>
+            <Link to="/dashboard/servers" className="text-slate-600 hover:text-slate-900">
+              Servers
+            </Link>
+          </BreadcrumbItem>
+          <BreadcrumbItem className="text-slate-900">{server.name}</BreadcrumbItem>
+        </Breadcrumbs>
+      </div>
 
+      {/* Title and status section - separated */}
       <div className="flex items-center justify-between">
-        <div className="space-y-2">
-          <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-semibold">{server.name}</h1>
+        <div className="space-y-3">
+          {/* Title and status row */}
+          <div className="flex items-center gap-4">
+            <h1 className="text-3xl font-bold text-slate-900">{server.name}</h1>
             <Chip
               color={getStatusColor(server.status)}
               variant="flat"
               size="lg"
+              className="font-medium"
             >
               {formatStatus(server.status)}
             </Chip>
           </div>
-          <div className="text-sm text-default-500">
-            Last updated: {formatDistanceToNow(lastSeenDate, { addSuffix: true })}
+          
+          {/* Last updated - separated */}
+          <div className="pt-2 border-t border-slate-100">
+            <p className="text-sm text-slate-500">
+              Last updated: {formatDistanceToNow(lastSeenDate, { addSuffix: true })}
+            </p>
           </div>
         </div>
 

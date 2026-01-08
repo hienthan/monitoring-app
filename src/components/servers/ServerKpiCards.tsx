@@ -11,11 +11,11 @@ interface KpiCardProps {
 
 const KpiCard: React.FC<KpiCardProps> = ({ title, value, unit = "%", color = "primary" }) => {
   return (
-    <Card>
-      <CardHeader className="flex flex-col items-start pb-0 pt-4 px-4">
-        <p className="text-sm font-medium text-default-600">{title}</p>
+    <Card className="border border-slate-200 shadow-sm">
+      <CardHeader className="flex flex-col items-start pb-3 pt-4 px-4 border-b border-slate-100">
+        <p className="text-sm font-semibold text-slate-700 uppercase tracking-wide">{title}</p>
       </CardHeader>
-      <CardBody className="flex flex-row items-center justify-center gap-4 pt-0 px-4 pb-4">
+      <CardBody className="flex flex-row items-center justify-between gap-4 pt-4 px-4 pb-4">
         <CircularProgress
           aria-label={`${title} usage`}
           value={value}
@@ -24,9 +24,9 @@ const KpiCard: React.FC<KpiCardProps> = ({ title, value, unit = "%", color = "pr
           showValueLabel
           valueLabel={<span className="text-sm font-semibold">{value}{unit}</span>}
         />
-        <div className="flex flex-col">
-          <span className="text-2xl font-semibold">{value}{unit}</span>
-          <span className="text-xs text-default-500">Usage</span>
+        <div className="flex flex-col items-end">
+          <span className="text-2xl font-bold text-slate-900">{value}{unit}</span>
+          <span className="text-xs text-slate-500 mt-1">Usage</span>
         </div>
       </CardBody>
     </Card>

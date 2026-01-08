@@ -29,15 +29,15 @@ export const AppsTable: React.FC<AppsTableProps> = ({
 
   if (isLoading) {
     return (
-      <div className="overflow-hidden rounded border bg-white">
+      <div className="overflow-hidden bg-white">
         <table className="min-w-full text-sm">
           <thead className="bg-slate-100 text-left">
             <tr>
               <th className="px-3 py-2 w-8"></th>
               <th className="px-3 py-2">APP NAME</th>
-              <th className="px-3 py-2">OWNER</th>
-              <th className="px-3 py-2">RUNTIME</th>
-              <th className="px-3 py-2">NOTES</th>
+              <th className="px-3 py-2 text-center">OWNER</th>
+              <th className="px-3 py-2 text-center">RUNTIME</th>
+              <th className="px-3 py-2 text-center">NOTES</th>
             </tr>
           </thead>
           <tbody className="divide-y">
@@ -67,15 +67,15 @@ export const AppsTable: React.FC<AppsTableProps> = ({
   }
 
   return (
-    <div className="overflow-hidden rounded border bg-white">
+    <div className="overflow-hidden bg-white">
       <table className="min-w-full text-sm">
         <thead className="bg-slate-100 text-left">
           <tr>
             <th className="px-3 py-2 w-8"></th>
             <th className="px-3 py-2">APP NAME</th>
-            <th className="px-3 py-2">OWNER</th>
-            <th className="px-3 py-2">RUNTIME</th>
-            <th className="px-3 py-2">NOTES</th>
+            <th className="px-3 py-2 text-center">OWNER</th>
+            <th className="px-3 py-2 text-center">RUNTIME</th>
+            <th className="px-3 py-2 text-center">NOTES</th>
           </tr>
         </thead>
         <tbody className="divide-y">
@@ -123,14 +123,14 @@ export const AppsTable: React.FC<AppsTableProps> = ({
                         {app.app?.name || app.appId || "Unknown"}
                       </p>
                     </td>
-                    <td className="px-3 py-2">
+                    <td className="px-3 py-2 text-center">
                       <span className="text-sm">{app.app?.owner || "-"}</span>
                     </td>
-                    <td className="px-3 py-2">
+                    <td className="px-3 py-2 text-center">
                       <span className="text-sm">{app.runtime || "-"}</span>
                     </td>
-                    <td className="px-3 py-2">
-                      <span className="text-sm text-slate-600 max-w-[200px] truncate block">
+                    <td className="px-3 py-2 text-center">
+                      <span className="text-sm text-slate-600 max-w-[200px] truncate block mx-auto">
                         {app.notes || "-"}
                       </span>
                     </td>

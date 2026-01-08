@@ -57,7 +57,7 @@ export const ServerDetailPage: React.FC = () => {
   const networkUsage = Math.floor(10 + Math.random() * 20);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Tier 1: Header */}
       <ServerHeader
         server={server}
@@ -69,15 +69,17 @@ export const ServerDetailPage: React.FC = () => {
       />
 
       {/* Tier 2: Summary strip - KPI Cards */}
-      <ServerKpiCards
-        cpu={cpuUsage}
-        ram={ramUsage}
-        disk={diskUsage}
-        network={networkUsage}
-      />
+      <div className="pt-4">
+        <ServerKpiCards
+          cpu={cpuUsage}
+          ram={ramUsage}
+          disk={diskUsage}
+          network={networkUsage}
+        />
+      </div>
 
       {/* Tier 3: Main body - 2 columns */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-4">
         {/* Left column (1/3) */}
         <div className="space-y-4">
           <ServerOverview server={server} />
@@ -89,26 +91,41 @@ export const ServerDetailPage: React.FC = () => {
 
         {/* Right column (2/3) */}
         <div className="lg:col-span-2">
-          <Tabs aria-label="Server apps and ports" defaultSelectedKey="apps">
-            <Tab key="apps" title="Apps">
-              <div className="pt-4">
-                <AppsTable
-                  apps={detail.apps}
-                  ports={detail.ports}
-                  isLoading={false}
-                />
-              </div>
-            </Tab>
+          <div className="space-y-2">
+            <h3 className="text-lg font-semibold px-1">Apps & Ports</h3>
+            <div className="overflow-hidden rounded border bg-white">
+              <Tabs 
+                aria-label="Server apps and ports" 
+                defaultSelectedKey="apps"
+                classNames={{
+                  base: "w-full",
+                  tabList: "border-b border-slate-200 bg-slate-50",
+                  tab: "data-[selected=true]:bg-white data-[selected=true]:border-b-2 data-[selected=true]:border-b-slate-900 data-[selected=true]:font-semibold data-[selected=true]:text-slate-900",
+                  tabContent: "group-data-[selected=true]:text-slate-900",
+                  panel: "p-0",
+                }}
+              >
+                <Tab key="apps" title="Apps">
+                  <div className="p-0">
+                    <AppsTable
+                      apps={detail.apps}
+                      ports={detail.ports}
+                      isLoading={false}
+                    />
+                  </div>
+                </Tab>
 
-            <Tab key="ports" title="Ports">
-              <div className="pt-4">
-                <PortsTable
-                  ports={detail.ports}
-                  isLoading={false}
-                />
-              </div>
-            </Tab>
-          </Tabs>
+                <Tab key="ports" title="Ports">
+                  <div className="p-0">
+                    <PortsTable
+                      ports={detail.ports}
+                      isLoading={false}
+                    />
+                  </div>
+                </Tab>
+              </Tabs>
+            </div>
+          </div>
         </div>
       </div>
     </div>

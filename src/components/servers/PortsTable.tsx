@@ -12,13 +12,13 @@ export const PortsTable: React.FC<PortsTableProps> = ({
 }) => {
   if (isLoading) {
     return (
-      <div className="overflow-hidden rounded border bg-white">
+      <div className="overflow-hidden bg-white">
         <table className="min-w-full text-sm">
           <thead className="bg-slate-100 text-left">
             <tr>
               <th className="px-3 py-2">PORT</th>
-              <th className="px-3 py-2">APP</th>
-              <th className="px-3 py-2">NOTES</th>
+              <th className="px-3 py-2 text-center">APP</th>
+              <th className="px-3 py-2 text-center">NOTES</th>
             </tr>
           </thead>
           <tbody className="divide-y">
@@ -42,13 +42,13 @@ export const PortsTable: React.FC<PortsTableProps> = ({
   }
 
   return (
-    <div className="overflow-hidden rounded border bg-white">
+    <div className="overflow-hidden bg-white">
       <table className="min-w-full text-sm">
         <thead className="bg-slate-100 text-left">
           <tr>
             <th className="px-3 py-2">PORT</th>
-            <th className="px-3 py-2">APP</th>
-            <th className="px-3 py-2">NOTES</th>
+            <th className="px-3 py-2 text-center">APP</th>
+            <th className="px-3 py-2 text-center">NOTES</th>
           </tr>
         </thead>
         <tbody className="divide-y">
@@ -66,13 +66,13 @@ export const PortsTable: React.FC<PortsTableProps> = ({
                     {port.protocol.toUpperCase()} {port.port}
                   </p>
                 </td>
-                <td className="px-3 py-2">
+                <td className="px-3 py-2 text-center">
                   <span className="text-sm">
-                    {port.app?.app?.name || port.app_link || "-"}
+                    {port.app?.app?.name || "-"}
                   </span>
                 </td>
-                <td className="px-3 py-2">
-                  <span className="text-sm text-slate-600 max-w-[200px] truncate block">
+                <td className="px-3 py-2 text-center">
+                  <span className="text-sm text-slate-600 max-w-[200px] truncate block mx-auto">
                     {port.notes || "-"}
                   </span>
                 </td>
