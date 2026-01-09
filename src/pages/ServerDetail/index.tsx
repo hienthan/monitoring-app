@@ -9,12 +9,33 @@ import { ServerOverview } from "../../components/servers/ServerOverview";
 import { RequiredServicesCard } from "../../components/servers/RequiredServicesCard";
 import { AppsTable } from "../../components/servers/AppsTable";
 import { PortsTable } from "../../components/servers/PortsTable";
+import { useNetdataMetrics } from "../../hooks/useNetdataMetrics";
 
 export const ServerDetailPage: React.FC = () => {
   const { id = "" } = useParams();
   const [detail, setDetail] = useState<ServerDetailVM | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Fetch Netdata metrics - must be called unconditionally
+  // Build netdataUrl from server.netdataUrl / netdataBaseUrl or fallback to http://{ip}:19999
+  const netdataUrl = React.useMemo(() => {
+    const server = detail?.server;
+    if (!server) return undefined;
+
+    // Respect isNetdataEnabled flag from API (default true if missing)
+    if (server.isNetdataEnabled === false) return undefined;
+
+    if (server.netdataUrl) return server.netdataUrl;
+    if (server.netdataBaseUrl) return server.netdataBaseUrl;
+
+    // Fallback: build from IP if nothing else is configured
+    if (server.ip) return `http://${server.ip}:19999`;
+
+    return undefined;
+  }, [detail?.server]);
+
+  const { metrics, isLoading: metricsLoading, error: metricsError } = useNetdataMetrics(netdataUrl);
+  
   const loadServerDetail = () => {
     if (!id) return;
     setIsLoading(true);
@@ -50,12 +71,6 @@ export const ServerDetailPage: React.FC = () => {
 
   const server = detail.server;
 
-  // Mock metrics (will be replaced with API data)
-  const cpuUsage = Math.floor(30 + Math.random() * 40);
-  const ramUsage = Math.floor(40 + Math.random() * 30);
-  const diskUsage = Math.floor(50 + Math.random() * 30);
-  const networkUsage = Math.floor(10 + Math.random() * 20);
-
   return (
     <div className="space-y-8">
       {/* Tier 1: Header */}
@@ -71,10 +86,8 @@ export const ServerDetailPage: React.FC = () => {
       {/* Tier 2: Summary strip - KPI Cards */}
       <div className="pt-4">
         <ServerKpiCards
-          cpu={cpuUsage}
-          ram={ramUsage}
-          disk={diskUsage}
-          network={networkUsage}
+          metrics={metrics}
+          isLoading={metricsLoading}
         />
       </div>
 

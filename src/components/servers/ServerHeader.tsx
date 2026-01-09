@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Breadcrumbs, BreadcrumbItem, Chip, Button } from "@heroui/react";
 import { Server } from "../../types/inventory";
-import { getStatusColor, formatStatus } from "../../types/servers";
 import { formatDistanceToNow } from "date-fns";
 
 interface ServerHeaderProps {
@@ -17,6 +16,11 @@ export const ServerHeader: React.FC<ServerHeaderProps> = ({
   onEdit,
 }) => {
   const lastSeenDate = new Date(server.lastSeen);
+  
+  // Use isActive field, default to true (Active)
+  const isActive = server.isActive !== undefined ? server.isActive : true;
+  const statusText = isActive ? "Active" : "Inactive";
+  const statusColor = isActive ? "success" : "default";
 
   return (
     <div className="space-y-6">
@@ -39,12 +43,12 @@ export const ServerHeader: React.FC<ServerHeaderProps> = ({
           <div className="flex items-center gap-4">
             <h1 className="text-3xl font-bold text-slate-900">{server.name}</h1>
             <Chip
-              color={getStatusColor(server.status)}
+              color={statusColor}
               variant="flat"
               size="lg"
               className="font-medium"
             >
-              {formatStatus(server.status)}
+              {statusText}
             </Chip>
           </div>
           

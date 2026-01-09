@@ -8,6 +8,11 @@ const useMock = false; // Set to false to use API
 
 // Map API response to Server type
 function mapApiServerToServer(apiServer: any): Server {
+  const netdataBaseUrl =
+    apiServer.netdata_base_url || apiServer.netdataBaseUrl || undefined;
+  const isNetdataEnabledRaw =
+    apiServer.is_netdata_enabled ?? apiServer.isNetdataEnabled;
+
   return {
     id: apiServer.id || apiServer["@id"] || "",
     name: apiServer.name || apiServer.hostname || "Unknown",
@@ -16,10 +21,18 @@ function mapApiServerToServer(apiServer: any): Server {
     env: (apiServer.env || apiServer.environment || "prod") as Environment,
     tags: Array.isArray(apiServer.tags) ? apiServer.tags : (apiServer.tags ? [apiServer.tags] : []),
     owner: apiServer.owner || apiServer.owner_name || "unknown",
-    netdataUrl: apiServer.netdata_url || apiServer.netdataUrl || apiServer.netdata_url,
+    netdataUrl:
+      apiServer.netdata_url ||
+      apiServer.netdataUrl ||
+      netdataBaseUrl ||
+      (apiServer.ip ? `http://${apiServer.ip}:19999` : undefined),
+    netdataBaseUrl,
+    isNetdataEnabled:
+      isNetdataEnabledRaw !== undefined ? !!isNetdataEnabledRaw : true,
     status: mapStatus(apiServer.status || apiServer.state),
     lastSeen: apiServer.lastSeen || apiServer.last_seen || apiServer.updated || new Date().toISOString(),
     notes: apiServer.notes || apiServer.note || "",
+    isActive: apiServer.is_active !== undefined ? apiServer.is_active : true, // Default to true if not provided
   };
 }
 
