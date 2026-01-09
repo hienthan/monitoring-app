@@ -11,8 +11,12 @@ export interface Server {
   tags: string[];
   owner: string;
   netdataUrl?: string;
+  netdataBaseUrl?: string;
+  isNetdataEnabled?: boolean;
   status: ServerStatus;
   lastSeen: string;
+  notes?: string;
+  isActive?: boolean; // Server active status from API (is_active field)
 }
 
 export interface PortOccupancy {
